@@ -1,8 +1,7 @@
 package com.example.mymovie;
 
-import android.media.Image;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,11 @@ import com.example.mymovie.data.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private ArrayList<Movie> movies;
+    private List<Movie> movies;
     private OnPosterClickListener onPosterClickListener;
     private OnReachEndListener onReachEndListener;
 
@@ -81,16 +81,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
     }
 
-    public void addMovies(ArrayList<Movie> movies) {
+    public void addMovies(List<Movie> movies) {
         this.movies = movies;
         notifyDataSetChanged();
     }
 
-    public ArrayList<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies = movies;
         notifyDataSetChanged();
     }
