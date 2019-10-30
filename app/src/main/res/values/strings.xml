@@ -4,4 +4,6 @@
     <string name="most_rated">Наиболее рейтинговые</string>
     <string name="most_popularity">Самые популярные</string>
     <string name="name">Название</string>
+    <string name="add_to_favourite">Добавлено в избранное</string>
+    <string name="delete_in_favourite">Удалено из избранного</string>
 </resources>
