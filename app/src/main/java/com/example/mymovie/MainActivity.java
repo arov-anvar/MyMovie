@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -39,20 +42,35 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.itemMain:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.itemFavourite:
+                Intent intentToFavourite = new Intent(this, FavouriteActivity.class);
+                startActivity(intentToFavourite);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        initElement();
 
-        RecyclerView recyclerViewPosters = findViewById(R.id.recyclerViewPosters);
-        switchSort = findViewById(R.id.switchSort);
-        textViewPopularity = findViewById(R.id.textViewPopularity);
-        textViewTopRated = findViewById(R.id.textViewTopRated);
-
-        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this, 2));
-        movieAdapter = new MovieAdapter();
-        recyclerViewPosters.setAdapter(movieAdapter);
         switchSort.setChecked(true);
 
         switchSort.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -66,10 +84,7 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter.setOnPosterClickListener(new MovieAdapter.OnPosterClickListener() {
             @Override
             public void onPosterClick(int position) {
-                Movie movie = movieAdapter.getMovies().get(position);
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra("id", movie.getId());
-                startActivity(intent);
+                posterClick(position);
             }
         });
 
@@ -87,6 +102,25 @@ public class MainActivity extends AppCompatActivity {
                 movieAdapter.setMovies(movies);
             }
         });
+    }
+
+    private void initElement() {
+        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        RecyclerView recyclerViewPosters = findViewById(R.id.recyclerViewPosters);
+        switchSort = findViewById(R.id.switchSort);
+        textViewPopularity = findViewById(R.id.textViewPopularity);
+        textViewTopRated = findViewById(R.id.textViewTopRated);
+
+        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this, 2));
+        movieAdapter = new MovieAdapter();
+        recyclerViewPosters.setAdapter(movieAdapter);
+    }
+
+    private void posterClick(int position) {
+        Movie movie = movieAdapter.getMovies().get(position);
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("id", movie.getId());
+        startActivity(intent);
     }
 
     public void onClickSetPopularity(View view) {

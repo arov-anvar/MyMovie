@@ -6,4 +6,6 @@
     <string name="name">Название</string>
     <string name="add_to_favourite">Добавлено в избранное</string>
     <string name="delete_in_favourite">Удалено из избранного</string>
+    <string name="main">Главная</string>
+    <string name="favourite">Избранное</string>
 </resources>
