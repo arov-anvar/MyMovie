@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.example.mymovie.adapter.MovieAdapter;
 import com.example.mymovie.data.MainViewModel;
 import com.example.mymovie.data.Movie;
 import com.example.mymovie.utils.JSONUtils;

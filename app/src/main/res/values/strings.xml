@@ -8,4 +8,5 @@
     <string name="delete_in_favourite">Удалено из избранного</string>
     <string name="main">Главная</string>
     <string name="favourite">Избранное</string>
+    <string name="launch_trailer">запустить трейлер</string>
 </resources>
