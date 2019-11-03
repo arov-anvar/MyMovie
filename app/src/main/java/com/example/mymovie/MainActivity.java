@@ -13,6 +13,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -125,6 +126,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
     }
 
+    private int getColumnCount() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = (int) (displayMetrics.widthPixels / displayMetrics.density);
+        return width / 185 > 2 ? width / 185 : 2;
+    }
+
     private void initElement() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         RecyclerView recyclerViewPosters = findViewById(R.id.recyclerViewPosters);
@@ -133,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         textViewTopRated = findViewById(R.id.textViewTopRated);
         progressBarLoading = findViewById(R.id.progressBarLoading);
 
-        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerViewPosters.setLayoutManager(new GridLayoutManager(this,  getColumnCount()));
         movieAdapter = new MovieAdapter();
         recyclerViewPosters.setAdapter(movieAdapter);
     }

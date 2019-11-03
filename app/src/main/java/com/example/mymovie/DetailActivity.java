@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView textViewReleaseDate;
     private TextView textViewOverview;
     private ImageView imageViewAddToFavourite;
+    private ScrollView scrollViewInfo;
 
     private RecyclerView recyclerViewTrailers;
     private RecyclerView recyclerViewReviews;
@@ -87,6 +89,7 @@ public class DetailActivity extends AppCompatActivity {
         textViewReleaseDate = findViewById(R.id.textViewReleaseDate);
         textViewOverview = findViewById(R.id.textViewOverview);
         imageViewAddToFavourite = findViewById(R.id.imageViewAddToFavourite);
+        scrollViewInfo = findViewById(R.id.scrollViewInfo);
 
         final Intent intent = getIntent();
         if (intent != null && intent.hasExtra("id")) {
@@ -124,6 +127,7 @@ public class DetailActivity extends AppCompatActivity {
         ArrayList<Review> reviews = JSONUtils.getReviewsFromJSON(jsonObjectReviews);
         trailerAdapter.setTrailers(trailers);
         reviewAdapter.setReviews(reviews);
+        scrollViewInfo.smoothScrollTo(0, 0);
     }
 
     public void onClickChangeFavourite(View view) {
